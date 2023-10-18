@@ -1,0 +1,26 @@
+<header class="text-gray-400 bg-gray-900 body-font px-10">
+  <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+    <a routerLink="" class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
+      <img
+        src="https://images.unsplash.com/photo-1649793117828-5b77308233db?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2525&q=80"
+        alt="Logo" class="mx-auto w-8 h-8 rounded-full ">
+      <span class="ml-3 text-xl">Bling</span>
+    </a>
+    <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
+      <a routerLink="products/shoes" class="mr-5 hover:text-white">Shoes</a>
+      <a routerLink="about" class="mr-5 hover:text-white">About</a>
+    </nav>
+    <a routerLink="cart/items">
+      <button
+        class="inline-flex items-center  ring-1 ring-indigo-500 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0 mr-5">cart
+      </button>
+    </a>
+    <button
+      class="inline-flex items-center ring-1 ring-indigo-500  py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0">logout
+      <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+        <path d="M5 12h14M12 5l7 7-7 7"></path>
+      </svg>
+    </button>
+  </div>
+</header>
