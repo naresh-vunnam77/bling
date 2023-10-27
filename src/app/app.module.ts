@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http'
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -10,6 +10,7 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { OffersComponent } from './pages/home/offers/offers.component';
 import { TestimonialsComponent } from './pages/home/testimonials/testimonials.component';
 import { AboutComponent } from './pages/about/about.component';
+import { AuthInterceptor } from './authentication/authInterceptor';
 
 
 
@@ -30,7 +31,11 @@ import { AboutComponent } from './pages/about/about.component';
     HttpClientModule,
 
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

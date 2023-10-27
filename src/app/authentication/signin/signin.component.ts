@@ -8,6 +8,7 @@ import { Router } from '@angular/router'
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit {
+  private user: object = {}
   isLoading: boolean = false
   constructor(private authService: AuthenticationService, private router: Router) {
 
@@ -27,17 +28,8 @@ export class SigninComponent implements OnInit {
     const { email, password } = this.signinForm.value as { email: string, password: string }
     this.isLoading = true
     this.authService.signIn(email, password).subscribe((data) => {
-      localStorage.setItem('token', data.token,)
-      localStorage.setItem('role', data.role,)
-      if (data.token) {
-        this.isLoading = false
-        if (data.role == "admin") {
-          this.router.navigate(['/admin/products'])
-        } else {
-          this.router.navigate(['/'])
-        }
-
-      }
+      this.user = data
+      this.authService.storeToken(data.token)
     })
   }
 

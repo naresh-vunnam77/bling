@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { Observable } from 'rxjs'
+import { Observable, BehaviorSubject } from 'rxjs'
 
 import { User } from '../shared/User.model'
 
@@ -12,13 +12,20 @@ export class AuthenticationService {
 
   private apiUrl = "http://localhost:9000/api/v1/auth"
 
+  private tokenSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null)
+
+
   constructor(private http: HttpClient) {
 
-    this.http.get(`${this.apiUrl}/test`).subscribe(data => {
-      console.log(data)
-    })
-
+    const token = localStorage.getItem('token')
+    this.tokenSubject.next(token)
   }
+
+  get token(): string | null {
+    return this.tokenSubject.value
+  }
+
+
 
   signUp(userData: User): Observable<any> {
     const headers: HttpHeaders = new HttpHeaders({ 'content-type': 'application/json' })
@@ -33,17 +40,16 @@ export class AuthenticationService {
 
   // Sign out
   signOut() {
-
+    this.tokenSubject.next(null)
   }
 
-  getCurrentUser() {
+  // store token
 
+  storeToken(token: string) {
+    localStorage.setItem('token', token)
+    this.tokenSubject.next(token)
   }
 
-  // Get the current user's ID
-  getCurrentUserId() {
-
-  }
 }
 
 

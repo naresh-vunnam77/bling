@@ -38,13 +38,7 @@ export class SignupComponent implements OnInit {
     this.isLoading = true
     this.authService.signUp(userData).subscribe((data) => {
       this.user = data
-      this.userToken = data.token
-      localStorage.setItem('token',data.token)
-      if (data.token) {
-        console.log(this.userToken)
-        this.isLoading = false
-        this.router.navigate(['/'])
-      }
+      this.authService.storeToken(data.token)
     })
 
 
